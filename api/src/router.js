@@ -1,6 +1,8 @@
 const { Router } = require('express');
 const multer = require('multer');
-const { multiply } = require('ramda');
+const path = require('path');
+
+const photoPath = path.resolve(__dirname, '../../client/photo-viewer.html');
 
 const router = Router();
 const storage = multer.diskStorage({
@@ -25,6 +27,10 @@ function fileFilter(request, file, callback) {
 function filename(request, file, callback) {
   callback(null, file.originalname);
 }
+
+router.get('/photo-viewer', (request, response) => {
+  response.sendFile(photoPath);
+});
 
 router.post('/upload', upload.single('photo'), (request, response) => {
   if (request.fileValidationError) {
