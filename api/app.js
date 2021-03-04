@@ -9,4 +9,4 @@ app.use('/*', (request, response) => {
   response.sendFile(pathToIndex);
 });
 
-module.exports = { app };
+module.exports = app;
